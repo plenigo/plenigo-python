@@ -1,8 +1,7 @@
 import abc
-import datetime
 from collections import OrderedDict
 
-from plenigo.client.http_client import HTTPClient, Sorting
+from plenigo.client.http_client import HTTPClient
 
 
 class APIResource(abc.ABC):
@@ -55,30 +54,6 @@ class APIResource(abc.ABC):
         """
         data = http_client.get("%s/%s" % (APIResource._get_entity_url_part(), entity_id))
         return APIResource._create_instance(http_client, data)
-
-    @staticmethod
-    def _create_search_params(size: int = 100, starting_after: any = None, sort: Sorting = Sorting.ASC,
-                              start_time: datetime = None, end_time: datetime = None) -> dict:
-        """
-        Creates params for retrieve all calls
-        :param size: amount of elements to return
-        :param starting_after: last element for pagination
-        :param sort: sorting order
-        :param start_time: start time
-        :param end_time: end time
-        :return: list of elements
-        """
-        params = {
-            "size": size,
-            "sort": sort
-        }
-        if starting_after is not None:
-            params["startingAfter"] = starting_after
-        if start_time is not None:
-            params["startTime"] = start_time.astimezone(datetime.timezone.utc).isoformat()
-        if end_time is not None:
-            params["endTime"] = end_time.astimezone(datetime.timezone.utc).isoformat()
-        return params
 
     def __setitem__(self, key, value):
         self._data[key] = value

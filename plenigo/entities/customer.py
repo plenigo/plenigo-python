@@ -3,6 +3,7 @@ from datetime import datetime
 
 from plenigo.client.http_client import HTTPClient, Sorting
 from plenigo.resources.deletable_resource import APIDeletableResource
+from plenigo.resources.searchable_resource import APISearchableResource
 
 
 class Customer(APIDeletableResource):
@@ -45,5 +46,6 @@ class Customer(APIDeletableResource):
             if external_system_id:
                 params["externalSystemId"] = external_system_id
 
-        return super(Customer).search(http_client=http_client, size=size, starting_after=starting_after, sort=sort, start_time=start_time,
-                                      end_time=end_time, add_additional_params=add_params)
+        return APISearchableResource._search_base(http_client=http_client, get_entity_url=Customer._get_entity_url_part,
+                                                  create_instance=Customer._create_instance, size=size, starting_after=starting_after, sort=sort, 
+                                                  start_time=start_time, end_time=end_time, add_additional_params=add_params)
