@@ -28,6 +28,28 @@ class Customer(APIDeletableResource):
         return Customer(http_client, data)
 
     @staticmethod
+    def get(http_client: HTTPClient, entity_id: any) -> any:
+        """
+        Retrieves the entity that is identified by the id
+        :param http_client: http client to use
+        :param entity_id: id of the entity
+        :return: retrieved instance
+        """
+        data = http_client.get("%s/%s" % (Customer._get_entity_url_part(), entity_id))
+        return Customer._create_instance(http_client, data)
+
+    @staticmethod
+    def create(http_client: HTTPClient, data: dict) -> any:
+        """
+        Creates a new instance with the given data.
+        :param http_client: http client to use
+        :param data: instance data
+        :return: instance created
+        """
+        data = http_client.post(Customer._get_entity_url_part(), data=data)
+        return Customer._create_instance(http_client, data)
+
+    @staticmethod
     def search(http_client: HTTPClient, size: int = 100, starting_after: datetime = None, sort: Sorting = Sorting.ASC,
                start_time: datetime = None, end_time: datetime = None, external_system_id: str = None) -> any:
         """

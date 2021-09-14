@@ -14,4 +14,4 @@ class APIDeletableResource(APIUpdatableResource, abc.ABC):
         """
         Deletes the current instance.
         """
-        self._http_client.delete("%s/%s" % (APIResource._get_entity_url_part(), self.get_id()))
+        self._http_client.delete("%s/%s" % (self._get_entity_url_part(), self.get_id()))

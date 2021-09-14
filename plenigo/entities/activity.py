@@ -26,6 +26,17 @@ class Activity(APIResource):
         return Activity(http_client, data)
 
     @staticmethod
+    def get(http_client: HTTPClient, entity_id: any) -> any:
+        """
+        Retrieves the entity that is identified by the id
+        :param http_client: http client to use
+        :param entity_id: id of the entity
+        :return: retrieved instance
+        """
+        data = http_client.get("%s/%s" % (Activity._get_entity_url_part(), entity_id))
+        return Activity._create_instance(http_client, data)
+
+    @staticmethod
     def search(http_client: HTTPClient, customer_id: str, size: int = 100, starting_after: datetime = None, sort: Sorting = Sorting.ASC,
                start_time: datetime = None, end_time: datetime = None, json_object_type: str = None, json_object_identifier: str = None) -> any:
         """

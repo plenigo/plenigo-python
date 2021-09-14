@@ -11,6 +11,7 @@ class APIUpdatableResource(APISearchableResource, abc.ABC):
     """
 
     @staticmethod
+    @abc.abstractmethod
     def create(http_client: HTTPClient, data: dict) -> any:
         """
         Creates a new instance with the given data.
@@ -18,8 +19,7 @@ class APIUpdatableResource(APISearchableResource, abc.ABC):
         :param data: instance data
         :return: instance created
         """
-        data = http_client.post(APIResource._get_entity_url_part(), data=data)
-        return APIResource._create_instance(http_client, data)
+        return None
 
     def update(self) -> any:
         """
@@ -28,5 +28,5 @@ class APIUpdatableResource(APISearchableResource, abc.ABC):
         """
         if self._http_client is None:
             raise ValueError("Instance must be a managed instance.")
-        self._data = self._http_client.put(url="%s/%s" % (APIResource._get_entity_url_part(), self.get_id()), data=self._data)
+        self._data = self._http_client.put(url="%s/%s" % (self._get_entity_url_part(), self.get_id()), data=self._data)
         return self

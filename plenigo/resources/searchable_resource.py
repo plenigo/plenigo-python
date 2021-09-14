@@ -73,3 +73,4 @@ class APISearchableResource(APIResource, abc.ABC):
         :param external_system_id: external system id
         :return: list of elements
         """
+        return None

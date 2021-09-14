@@ -10,6 +10,7 @@ class APIGetResource(APIResource, abc.ABC):
     """
 
     @staticmethod
+    @abc.abstractmethod
     def get(http_client: HTTPClient, entity_id: any) -> any:
         """
         Retrieves the entity that is identified by the id
@@ -17,5 +18,4 @@ class APIGetResource(APIResource, abc.ABC):
         :param entity_id: id of the entity
         :return: retrieved instance
         """
-        data = http_client.get("%s/%s" % (APIResource._get_entity_url_part(), entity_id))
-        return APIResource._create_instance(http_client, data)
+        return None
