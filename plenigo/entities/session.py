@@ -45,3 +45,12 @@ class Session(APIResource):
         :return: detailed customer information including email
         """
         return http_client.get(url="sessions/customerData", params={"sessionToken": sessionToken})
+
+    @staticmethod
+    def transfer_token(http_client: HTTPClient, transferToken: str) -> any:
+        """
+        Convert a transferToken into a sessionToken
+        :param transferToken: The trasfer token to convert
+        :return: The sessionToken
+        """
+        return http_client.get(url="sessions/transferToken", params={"transferToken": sessionToken})
