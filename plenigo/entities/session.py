@@ -38,7 +38,7 @@ class Session(APIResource):
         return http_client.get(url="sessions/validate", params={"sessionToken": sessionToken})
 
     @staticmethod
-    def customerData(http_client: HTTPClient, sessionToken: str) -> any:
+    def customer_data(http_client: HTTPClient, sessionToken: str) -> any:
         """
         Fetch the customer data for a valid session token
         :param sessionToken: The token for the customer's session
