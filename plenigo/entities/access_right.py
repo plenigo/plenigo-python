@@ -64,8 +64,8 @@ class AccessRight(APIResource):
         :param data: instance data
         :return: instance created
         """
-        data = http_client.post(APIResource._get_entity_url_part(), data=data)
-        return APIResource._create_instance(http_client, data)
+        data = http_client.post("%s/%s" % (AccessRight._get_entity_url_part(), data["customerId"]), data=data)
+        return AccessRight._create_instance(http_client, data)
 
     def update(self, access_right_unique_id: str, data: dict) -> any:
         """
