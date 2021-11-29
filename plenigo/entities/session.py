@@ -29,6 +29,17 @@ class Session(APIResource):
         return Session(http_client, data)
 
     @staticmethod
+    def create(http_client: HTTPClient, data: dict) -> any:
+        """
+        Creates a new session with the given data.
+        :param http_client: http client to use
+        :param data: instance data (`customerId` is required)
+        :return: instance created
+        """
+        data = http_client.post("%s/%s" % (Session._get_entity_url_part(), data["customerId"]), data=data)
+        return Session._create_instance(http_client, data)
+
+    @staticmethod
     def validate(http_client: HTTPClient, sessionToken: str) -> any:
         """
         Check if a session is currently valid
