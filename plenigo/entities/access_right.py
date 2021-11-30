@@ -57,15 +57,15 @@ class AccessRight(APIResource):
         return http_client.get(url="accessRights/%s" % customer_id)
 
     @staticmethod
-    def create(http_client: HTTPClient, data: dict) -> any:
+    def create(http_client: HTTPClient, customer_id: str, data: dict) -> any:
         """
         Creates a new instance with the given data.
         :param http_client: http client to use
         :param data: instance data
         :return: instance created
         """
-        data = http_client.post(APIResource._get_entity_url_part(), data=data)
-        return APIResource._create_instance(http_client, data)
+        data = http_client.post("%s/%s" % (AccessRight._get_entity_url_part(), customer_id), data=data)
+        return AccessRight._create_instance(http_client, data)
 
     def update(self, access_right_unique_id: str, data: dict) -> any:
         """
