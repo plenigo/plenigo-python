@@ -11,7 +11,7 @@ htmlcov/
 pyenv/
 doc/_build/
 doc/html/
-*.egg-info/
+src/*.egg-info/
 *.db
 project\boot\
 project\plugins\project
